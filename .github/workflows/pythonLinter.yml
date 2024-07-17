@@ -12,7 +12,7 @@ jobs:
 
   build:
     name: Lint Code Base
-    runs-on: tltest1
+    runs-on: ubuntu-latest
 
     steps:
       # Checkout the code base
