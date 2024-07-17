@@ -22,10 +22,9 @@ jobs:
         project: 'checkin'
         path: '.'
         format: 'HTML'
-        out: './dependency-check-report'
 
     - name: Upload Dependency-Check report
       uses: actions/upload-artifact@v2
       with:
         name: dependency-check-report
-        path: ./dependency-check-report
+        path: ${{github.workspace}}/reports
