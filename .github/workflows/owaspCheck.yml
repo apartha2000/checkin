@@ -30,7 +30,7 @@ jobs:
         project: 'checkin'
         path: '.'
         format: 'HTML'
-        output-directory: './dependency-check-report'
+        out: './dependency-check-report'
 
     - name: Upload Dependency-Check report
       uses: actions/upload-artifact@v2
