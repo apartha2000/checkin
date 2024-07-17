@@ -31,7 +31,6 @@ jobs:
           LINTER_RULES_PATH: .github/workflows
           VALIDATE_JAVA: false
           VALIDATE_JSCPD: false
-          JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
           VALIDATE_JAVASCRIPT_STANDARD: false
           VALIDATE_SQL: false
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
