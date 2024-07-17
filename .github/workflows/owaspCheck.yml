@@ -25,7 +25,6 @@ jobs:
       # env:
       #   JAVA_HOME: /opt/jdk
       with:
-        project: 'checkin'
         format: 'HTML'
         out: './dependency-check-report'
 
