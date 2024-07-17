@@ -1,0 +1,7 @@
+{
+  "name": "example-project",
+  "version": "1.0.0",
+  "dependencies": {
+    "hoek": "4.2.0" // Vulnerable version
+  }
+}
