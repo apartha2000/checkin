@@ -22,7 +22,7 @@ jobs:
         distribution: 'adopt'
 
     - name: Run OWASP Dependency-Check
-      uses: dependency-check/scan-action@v1
+      uses: dependency-check/Dependency-Check_Action@main
       with:
         project: 'checkin'
         format: 'HTML'
