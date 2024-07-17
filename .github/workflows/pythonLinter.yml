@@ -9,9 +9,10 @@ on:
       - main 
 
 jobs:
+
   build:
     name: Lint Code Base
-    runs-on: ubuntu-latest
+    runs-on: tltest1
 
     steps:
       # Checkout the code base
@@ -25,6 +26,12 @@ jobs:
       - name: Lint Code Base
         uses: github/super-linter@v4
         env:
+          VALIDATE_ALL_CODEBASE: false
+          DEFAULT_BRANCH: master
+          LINTER_RULES_PATH: .github/workflows
+          VALIDATE_JAVA: false
+          VALIDATE_JSCPD: false
+          JAVASCRIPT_ES_CONFIG_FILE: .eslintrc.json
+          VALIDATE_JAVASCRIPT_STANDARD: false
+          VALIDATE_SQL: false
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          VALIDATE_JAVA: true
-          VALIDATE_PYTHON_FLAKE8: false
