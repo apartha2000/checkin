@@ -17,39 +17,33 @@ jobs:
       - name: Checkout code
         uses: actions/checkout@v3
 
-      - name: Set up Java
-        uses: actions/setup-java@v3
-        with:
-          distribution: 'adopt'
-          java-version: '8'
-
-      - name: Set up Python
-        uses: actions/setup-python@v4
-        with:
-          python-version: '3.10'
-
-      - name: Set up Node.js
-        uses: actions/setup-node@v3
-        with:
-          node-version: '14.19.3'
-
-      # - name: Snyk Scan for Maven (pom.xml)
-      #   uses: snyk/actions/maven@master
-      #   env:
-      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      # - name: Set up Java
+      #   uses: actions/setup-java@v3
       #   with:
-      #     args: test --file=pom.xml
+      #     distribution: 'adopt'
+      #     java-version: '8'
+
+      # - name: Set up Python
+      #   uses: actions/setup-python@v4
+      #   with:
+      #     python-version: '3.10'
+
+      # - name: Set up Node.js
+      #   uses: actions/setup-node@v3
+      #   with:
+          # node-version: '14.19.3'
+
+      - name: Snyk Scan for Maven (pom.xml)
+        uses: snyk/actions/maven@master
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Snyk Scan for Python (requirements.txt)
         uses: snyk/actions/python@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: test --file=requirements.txt
 
       - name: Snyk Scan for Node.js (package.json)
         uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-        with:
-          args: test --file=package.json
