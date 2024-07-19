@@ -1,8 +1,10 @@
 name: Snyk Security Scan
 
 on:
+  push:
+    branches: main
   pull_request:
-    branches: [test_test_test]
+    branches: main
 
 jobs:
   snyk:
@@ -41,5 +43,3 @@ jobs:
       - name: Test for vulnerabilities
         run: snyk test --all-projects
 
-      - name: Monitor project
-        run: snyk monitor
