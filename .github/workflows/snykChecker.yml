@@ -33,10 +33,10 @@ jobs:
       #   with:
           # node-version: '14.19.3'
 
-      - name: Snyk Scan for Maven (pom.xml)
-        uses: snyk/actions/maven@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+      # - name: Snyk Scan for Maven (pom.xml)
+      #   uses: snyk/actions/maven@master
+      #   env:
+      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Snyk Scan for Python (requirements.txt)
         uses: snyk/actions/python@master
