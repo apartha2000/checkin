@@ -1,49 +1,24 @@
-name: Snyk Security Scan
+name: Snyk Scan
 
-on:
-  push:
-    branches:
-      - main
-  pull_request:
-    branches:
-      - main
+on: [push]
 
 jobs:
   snyk:
-    name: Snyk Security Scan
     runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v2
 
-      # - name: Set up Java
-      #   uses: actions/setup-java@v3
-      #   with:
-      #     distribution: 'adopt'
-      #     java-version: '8'
+      - name: Set up Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '14'
 
-      # - name: Set up Python
-      #   uses: actions/setup-python@v4
-      #   with:
-      #     python-version: '3.10'
+      - name: Install dependencies
+        run: npm install
 
-      # - name: Set up Node.js
-      #   uses: actions/setup-node@v3
-      #   with:
-          # node-version: '14.19.3'
-
-      # - name: Snyk Scan for Maven (pom.xml)
-      #   uses: snyk/actions/maven@master
-      #   env:
-      #     SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-      - name: Snyk Scan for Python (requirements.txt)
+      - name: Run Snyk to check for vulnerabilities
         uses: snyk/actions/python@master
-        env:
-          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
-
-      - name: Snyk Scan for Node.js (package.json)
-        uses: snyk/actions/node@master
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
