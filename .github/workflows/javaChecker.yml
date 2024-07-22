@@ -1,30 +1,44 @@
-name: Java Checks
+name: IntelliJ IDEA Inspections
 
 on:
   push:
-    branches: [ main ]
+    branches:
+      - main
   pull_request:
-    branches: [ main ]
+    branches:
+      - main
 
 jobs:
-  inspect:
+  inspections:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Run IntelliJ
-      uses: mridang/action-idea@master
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up JDK 8
+      uses: actions/setup-java@v2
       with:
-        target: .
-        profile: ./.idea/inspectionProfiles/Project_Default.xml
-        output: ./output
-        verbosity: v2
-        scope: Inspection
-        plugins: 1347
+        java-version: '8'
+
+    - name: Download IntelliJ IDEA CLI
+      run: |
+        wget https://download.jetbrains.com/idea/ideaIC-2023.1.1.tar.gz
+        tar -xzf ideaIC-2023.1.1.tar.gz
+        sudo mv idea-IC-*/ /opt/idea
+        echo "/opt/idea/bin" >> $GITHUB_PATH
+
+    - name: Run IntelliJ IDEA inspections
+      run: |
+        mkdir inspections
+        /opt/idea/bin/inspect.sh \
+          $GITHUB_WORKSPACE \
+          /opt/idea/bin/inspectionProfile.xml \
+          inspections \
+          -v2
 
     - name: Upload inspection results
       uses: actions/upload-artifact@v2
       with:
         name: inspection-results
-        path: output
-
-
+        path: inspections
