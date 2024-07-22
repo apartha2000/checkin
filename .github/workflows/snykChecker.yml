@@ -20,6 +20,10 @@ jobs:
           java-version: '8'
           distribution: 'adopt'
 
+      - name: Install Dependencies
+        run: |
+          npm install
+
       - name: Set up Snyk
         uses: snyk/actions/setup@master
         with:
@@ -29,5 +33,5 @@ jobs:
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
       - name: Test for JS Vulnerabilties
-        run: snyk test --file=package.json
+        run: snyk test --all-projects
 
