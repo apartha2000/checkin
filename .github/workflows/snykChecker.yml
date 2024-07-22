@@ -29,8 +29,8 @@ jobs:
         run: snyk auth ${{ secrets.SNYK_TOKEN }}
 
       - name: Test for vulnerabilities
-        run: snyk test pom.xml 
+        run: snyk test --file=pom.xml
 
       - name: Test for JS Vulnerabilties
-        run: snyk test package.json
+        run: snyk test --file=pom.xml
 
