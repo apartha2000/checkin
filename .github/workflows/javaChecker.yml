@@ -1,0 +1,22 @@
+name: Java Inspections
+
+on:
+  push:
+    branches:
+      - main 
+  pull_request:
+    branches:
+      - main 
+
+jobs:
+  security-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout branch
+        uses: actions/checkout@v2
+
+      - name: Run IntelliJ Inspections
+        uses: gps/intellij-inspections@master
+        with:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
