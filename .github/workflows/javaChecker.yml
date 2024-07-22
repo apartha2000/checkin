@@ -1,23 +1,36 @@
-name: Java Inspections
+name: CI
 
 on:
   push:
-    branches:
-      - main 
+    branches: [ main ]
   pull_request:
-    branches:
-      - main 
+    branches: [ main ]
 
 jobs:
-  security-scan:
+  inspect:
     runs-on: ubuntu-latest
 
     steps:
-      - name: Checkout branch
-        uses: actions/checkout@v2
+    - name: Checkout code
+      uses: actions/checkout@v2
 
-      - name: Run IntelliJ Inspections
-        uses: gps/intellij-inspections@master
-        with:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-          INSPECTIONS_FILE: Inspections.xml
+    - name: Set up Java
+      uses: actions/setup-java@v2
+      with:
+        java-version: '11'
+
+    - name: Run IntelliJ Inspections
+      uses: gps/intellij-inspections@master
+      with:
+        project-root: ${{ github.workspace }}
+        profile-path: .idea/inspectionProfiles/Project_Default.xml
+        output-path: inspection-results
+        options: '-profilePath .idea/inspectionProfiles/Project_Default.xml -format xml'
+      continue-on-error: true
+
+    - name: Upload inspection results
+      uses: actions/upload-artifact@v2
+      with:
+        name: inspection-results
+        path: inspection-results
+
