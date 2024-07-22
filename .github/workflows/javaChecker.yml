@@ -1,4 +1,4 @@
-name: CI
+name: Java Checks
 
 on:
   push:
@@ -11,28 +11,20 @@ jobs:
     runs-on: ubuntu-latest
 
     steps:
-    - name: Checkout code
-      uses: actions/checkout@v2
-
-    - name: Set up Java
-      uses: actions/setup-java@v2
+    - name: Run IntelliJ
+      uses: mridang/action-idea@master
       with:
-        java-version: '8'
-        distribution: 'adopt'
-
-    - name: Run IntelliJ Inspections
-      uses: gps/intellij-inspections@master
-      with:
-        project-root: ${{ github.workspace }}
-        profile-path: .idea/inspectionProfiles/Project_Default.xml
-        output-path: inspection-results
-        options: '-profilePath .idea/inspectionProfiles/Project_Default.xml -format xml'
-      continue-on-error: true
+        target: .
+        profile: ./.idea/inspectionProfiles/Project_Default.xml
+        output: ./output
+        verbosity: v2
+        scope: Inspection
+        plugins: 1347
 
     - name: Upload inspection results
       uses: actions/upload-artifact@v2
       with:
         name: inspection-results
-        path: inspection-results
+        path: output
 
 
