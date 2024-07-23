@@ -1,0 +1,25 @@
+name: Vul Scan
+
+on:
+  push:
+    branches:
+      - main
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  vul-scan:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v4
+
+    - name: Scan for vulnerabilities
+      uses: anchore/scan-action@v3
+      with:
+        path: .
+        output-format: table
+        by-cve: true
+
