@@ -16,6 +16,9 @@ jobs:
     - name: Checkout repository
       uses: actions/checkout@v4
 
+    - name: Lets Install the npm dependencies
+      run: npm install
+      
     - name: Scan for vulnerabilities
       uses: anchore/scan-action@v3
       with:
