@@ -2,6 +2,10 @@
   "name": "example-project",
   "version": "1.0.0",
   "dependencies": {
-    "hoek": "4.2.0"
-   }
+    "hoek": "4.2.0",
+    "lodash": "4.17.11",
+    "jquery": "3.4.1",
+    "express": "4.16.0",
+    "axios": "0.18.0"
+  }
 }
