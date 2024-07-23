@@ -1,19 +1,25 @@
-name: Scan Action 
+name: Scan for Vulnerabilities
 
 on:
   push:
-    branches: main
+    branches:
+      - main
   pull_request:
-    branches: main
+    branches:
+      - main
 
 jobs:
-  scan-action:
-    name: Scan Action
+  vulnerability-scan:
     runs-on: ubuntu-latest
+
     steps:
-    - name: Scan current project
-      uses: anchore/scan-action@v3
-      with:
-        path: "."
-        output-format: 'table'
-        
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Set up Grype
+      run: |
+        curl -sSfL https://raw.githubusercontent.com/anchore/grype/main/install.sh | sh -s -- -b /usr/local/bin
+
+    - name: Scan current directory for vulnerabilities
+      run: |
+        grype dir:. --output table
