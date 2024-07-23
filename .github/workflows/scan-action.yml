@@ -1,0 +1,19 @@
+name: Scan Action 
+
+on:
+  push:
+    branches: main
+  pull_request:
+    branches: main
+
+jobs:
+  scan-action:
+    name: Scan Action
+    runs-on: ubuntu-latest
+    steps:
+    - name: Scan current project
+      uses: anchore/scan-action@v3
+      with:
+        path: "."
+        output-format: 'table'
+        
