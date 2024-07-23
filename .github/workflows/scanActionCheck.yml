@@ -22,4 +22,5 @@ jobs:
         path: .
         output-format: table
         by-cve: true
+        severity-cutoff: negligible
 
