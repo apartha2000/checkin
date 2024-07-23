@@ -30,7 +30,7 @@ jobs:
           distribution: 'adopt'
       - name: Run PMD
         id: pmd
-        uses: pmd/pmd-github-action@v2
+        uses: pmd/pmd-github-action@v3
         with:
           rulesets: 'ruleset.xml'
           analyzeModifiedFilesOnly: false
